@@ -48,16 +48,16 @@ class LaravelAliyunSlsProvider extends ServiceProvider
                 'handlerConfig' => [
                     'handler' => AliyunSlsHandler::class,
                     'handler_with' => [
-                        'endpoint' => $slsConfig['endpoint'],
-                        'accessKeyId' => $slsConfig['accessKeyId'],
-                        'accessKey' => $slsConfig['accessKey'],
-                        'project' => $slsConfig['project'],
-                        'logstore' => $slsConfig['logstore'],
+                        'endpoint' => $slsConfig['endpoint'] ?? '',
+                        'accessKeyId' => $slsConfig['accessKeyId'] ?? '',
+                        'accessKey' => $slsConfig['accessKey'] ?? '',
+                        'project' => $slsConfig['project'] ?? '',
+                        'logstore' => $slsConfig['logstore'] ?? '',
                     ],
                 ],
-                'bufferLimit' => $slsConfig['bufferLimit'],
+                'bufferLimit' => $slsConfig['bufferLimit'] ?? '',
             ],
-            'formatter' => class_exists($slsConfig['formatter']) ? $slsConfig['formatter'] : AliyunSlsFormatter::class,
+            'formatter' => (isset($slsConfig['formatter']) && class_exists($slsConfig['formatter'])) ? ($slsConfig['formatter'] ?? '') : AliyunSlsFormatter::class,
         ];
     }
 }
